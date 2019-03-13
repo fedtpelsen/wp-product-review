@@ -931,7 +931,24 @@ class WPPR_Review_Model extends WPPR_Model_Abstract {
 
 		return apply_filters( 'wppr_thumb', isset( $image_thumb[0] ) ? $image_thumb[0] : $this->image, $this->ID, $this );
 	}
+	
+	public function get_small_thumbnail_1() {
+		// filter for image size;
+		$size        = apply_filters( 'wppr_review_image_size_1', 'thumbnail', $this->ID, $this );
+		$image_thumb = '';
+		$image_id = $this->get_image_id();
+		if ( ! empty( $image_id ) ) {
+			$image_thumb = wp_get_attachment_image_src( $image_id, $size );
+			if ( $size !== 'thumbnail' ) {
+				if ( $image_thumb[0] === $this->image ) {
+					$image_thumb = wp_get_attachment_image_src( $image_id, 'thumbnail' );
+				}
+			}
+		}
 
+		return apply_filters( 'wppr_thumb', isset( $image_thumb[0] ) ? $image_thumb[0] : $this->image, $this->ID, $this );
+	}
+	
 	/**
 	 * Return the review image's alt text.
 	 *
