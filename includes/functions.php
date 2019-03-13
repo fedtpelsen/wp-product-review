@@ -379,3 +379,14 @@ if ( ! function_exists( 'wppr_layout_get_affiliate_buttons' ) ) {
 if ( function_exists( 'register_block_type' ) ) {
 	WPPR_Gutenberg::get_instance();
 }
+
+add_filter( 'wppr_review_image_size','cdctps_review_image_size',20,2 );
+function cdctps_review_image_size($post_id ) {
+	return "full";
+}
+
+add_filter( 'wppr_review_image_size_1','cdctps_review_image_size_1',20,2 );
+function cdctps_review_image_size_1($post_id ) {
+	return "wppr_widget_image";
+}
+
